@@ -1,0 +1,1527 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{exercise1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Programming Exercise 1: Linear
+Regression}\label{programming-exercise-1-linear-regression}
+
+\subsection{Introduction}\label{introduction}
+
+In this exercise, you will implement linear regression and get to see it
+work on data. Before starting on this programming exercise, we strongly
+recommend watching the video lectures and completing the review
+questions for the associated topics.
+
+All the information you need for solving this assignment is in this
+notebook, and all the code you will be implementing will take place
+within this notebook. The assignment can be promptly submitted to the
+coursera grader directly from this notebook (code and instructions are
+included below).
+
+Before we begin with the exercises, we need to import all libraries
+required for this programming exercise. Throughout the course, we will
+be using \href{http://www.numpy.org/}{\texttt{numpy}} for all arrays and
+matrix operations, and
+\href{https://matplotlib.org/}{\texttt{matplotlib}} for plotting.
+
+You can find instructions on how to install required libraries in the
+README file in the
+\href{https://github.com/dibgerge/ml-coursera-python-assignments}{github
+repository}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} used for manipulating directory paths}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        
+        \PY{c+c1}{\PYZsh{} Scientific and vector computation for python}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{c+c1}{\PYZsh{} Plotting library}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}  \PY{c+c1}{\PYZsh{} needed to plot 3\PYZhy{}D surfaces}
+        
+        \PY{c+c1}{\PYZsh{} library written for this exercise providing additional functions for assignment submission, and others}
+        \PY{k+kn}{import} \PY{n+nn}{utils} 
+        
+        \PY{c+c1}{\PYZsh{} define the submission/grader object for this exercise}
+        \PY{n}{grader} \PY{o}{=} \PY{n}{utils}\PY{o}{.}\PY{n}{Grader}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} tells matplotlib to embed plots within the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsection{Submission and Grading}\label{submission-and-grading}
+
+After completing each part of the assignment, be sure to submit your
+solutions to the grader.
+
+For this programming exercise, you are only required to complete the
+first part of the exercise to implement linear regression with one
+variable. The second part of the exercise, which is optional, covers
+linear regression with multiple variables. The following is a breakdown
+of how each part of this exercise is scored.
+
+\textbf{Required Exercises}
+
+\begin{longtable}[]{@{}lllc@{}}
+\toprule
+Section & Part & Submitted Function & Points\tabularnewline
+\midrule
+\endhead
+1 & Section \ref{section1} & Section \ref{warmupexercise} &
+10\tabularnewline
+2 & Section \ref{section2} & Section \ref{computecost} &
+40\tabularnewline
+3 & Section \ref{section3} & Section \ref{gradientdescent} &
+50\tabularnewline
+& Total Points & & 100\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{Optional Exercises}
+
+\begin{longtable}[]{@{}clcc@{}}
+\toprule
+Section & Part & Submitted Function & Points\tabularnewline
+\midrule
+\endhead
+4 & Section \ref{section4} & Section \ref{featurenormalize} &
+0\tabularnewline
+5 & Section \ref{section5} & Section \ref{computecostmulti} &
+0\tabularnewline
+6 & Section \ref{section5} & Section \ref{gradientdescentmulti} &
+0\tabularnewline
+7 & Section \ref{section7} & Section \ref{normaleqn} & 0\tabularnewline
+\bottomrule
+\end{longtable}
+
+You are allowed to submit your solutions multiple times, and we will
+take only the highest score into consideration.
+
+At the end of each section in this notebook, we have a cell which
+contains code for submitting the solutions thus far to the grader.
+Execute the cell to see your score up to the current section. For all
+your work to be submitted properly, you must execute those cells at
+least once. They must also be re-executed everytime the submitted
+function is updated.
+
+\subsection{Debugging}\label{debugging}
+
+Here are some things to keep in mind throughout this exercise:
+
+\begin{itemize}
+\item
+  Python array indices start from zero, not one (contrary to
+  OCTAVE/MATLAB).
+\item
+  There is an important distinction between python arrays (called
+  \texttt{list} or \texttt{tuple}) and \texttt{numpy} arrays. You should
+  use \texttt{numpy} arrays in all your computations. Vector/matrix
+  operations work only with \texttt{numpy} arrays. Python lists do not
+  support vector operations (you need to use for loops).
+\item
+  If you are seeing many errors at runtime, inspect your matrix
+  operations to make sure that you are adding and multiplying matrices
+  of compatible dimensions. Printing the dimensions of \texttt{numpy}
+  arrays using the \texttt{shape} property will help you debug.
+\item
+  By default, \texttt{numpy} interprets math operators to be
+  element-wise operators. If you want to do matrix multiplication, you
+  need to use the \texttt{dot} function in \texttt{numpy}. For, example
+  if \texttt{A} and \texttt{B} are two \texttt{numpy} matrices, then the
+  matrix operation AB is \texttt{np.dot(A,\ B)}. Note that for
+  2-dimensional matrices or vectors (1-dimensional), this is also
+  equivalent to \texttt{A@B} (requires python \textgreater{}= 3.5).
+\end{itemize}
+
+     \#\# 1 Simple python and \texttt{numpy} function
+
+The first part of this assignment gives you practice with python and
+\texttt{numpy} syntax and the homework submission process. In the next
+cell, you will find the outline of a \texttt{python} function. Modify it
+to return a 5 x 5 identity matrix by filling in the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{=}\NormalTok{ np.eye(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{warmUpExercise}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Example function in Python which computes the identity matrix.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    A : array\PYZus{}like}
+        \PY{l+s+sd}{        The 5x5 identity matrix.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Return the 5x5 identity matrix.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}    
+            \PY{c+c1}{\PYZsh{} ======== YOUR CODE HERE ======}
+            \PY{n}{A} \PY{o}{=} \PY{p}{[}\PY{p}{]}   \PY{c+c1}{\PYZsh{} modify this line}
+            
+            \PY{c+c1}{\PYZsh{} ==============================}
+            \PY{k}{return} \PY{n}{A}
+\end{Verbatim}
+
+
+    The previous cell only defines the function \texttt{warmUpExercise}. We
+can now run it by executing the following cell to see its output. You
+should see output similar to the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{array([[ }\DecValTok{1}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.],}
+\NormalTok{       [ }\DecValTok{0}\NormalTok{.,  }\DecValTok{1}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.],}
+\NormalTok{       [ }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{1}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.],}
+\NormalTok{       [ }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{1}\NormalTok{.,  }\DecValTok{0}\NormalTok{.],}
+\NormalTok{       [ }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{0}\NormalTok{.,  }\DecValTok{1}\NormalTok{.]])}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{warmUpExercise}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{1.1 Submitting solutions}\label{submitting-solutions}
+
+After completing a part of the exercise, you can submit your solutions
+for grading by first adding the function you modified to the grader
+object, and then sending your function to Coursera for grading.
+
+The grader will prompt you for your login e-mail and submission token.
+You can obtain a submission token from the web page for the assignment.
+You are allowed to submit your solutions multiple times, and we will
+take only the highest score into consideration.
+
+Execute the next cell to grade your solution to the first part of this
+exercise.
+
+\emph{You should now submit you solutions.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} appends the implemented function in part 1 to the grader object}
+        \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{warmUpExercise}
+        
+        \PY{c+c1}{\PYZsh{} send the added functions to coursera grader for getting a grade on this part}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{2 Linear regression with one
+variable}\label{linear-regression-with-one-variable}
+
+Now you will implement linear regression with one variable to predict
+profits for a food truck. Suppose you are the CEO of a restaurant
+franchise and are considering different cities for opening a new outlet.
+The chain already has trucks in various cities and you have data for
+profits and populations from the cities. You would like to use this data
+to help you select which city to expand to next.
+
+The file \texttt{Data/ex1data1.txt} contains the dataset for our linear
+regression problem. The first column is the population of a city and the
+second column is the profit of a food truck in that city. A negative
+value for profit indicates a loss.
+
+We provide you with the code needed to load this data. The dataset is
+loaded from the data file into the variables \texttt{x} and \texttt{y}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Read comma separated data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex1data1.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}  \PY{c+c1}{\PYZsh{} number of training examples}
+\end{Verbatim}
+
+
+    \subsubsection{2.1 Plotting the Data}\label{plotting-the-data}
+
+Before starting on any task, it is often useful to understand the data
+by visualizing it. For this dataset, you can use a scatter plot to
+visualize the data, since it has only two properties to plot (profit and
+population). Many other problems that you will encounter in real life
+are multi-dimensional and cannot be plotted on a 2-d plot. There are
+many plotting libraries in python (see this
+\href{https://blog.modeanalytics.com/python-data-visualization-libraries/}{blog
+post} for a good summary of the most popular ones).
+
+In this course, we will be exclusively using \texttt{matplotlib} to do
+all our plotting. \texttt{matplotlib} is one of the most popular
+scientific plotting libraries in python and has extensive tools and
+functions to make beautiful plots. \texttt{pyplot} is a module within
+\texttt{matplotlib} which provides a simplified interface to
+\texttt{matplotlib}'s most common plotting tasks, mimicking MATLAB's
+plotting interface.
+
+You might have noticed that we have imported the \texttt{pyplot} module
+at the beginning of this exercise using the command
+\texttt{from\ matplotlib\ import\ pyplot}. This is rather uncommon, and
+if you look at python code elsewhere or in the \texttt{matplotlib}
+tutorials, you will see that the module is named \texttt{plt}. This is
+used by module renaming by using the import command
+\texttt{import\ matplotlib.pyplot\ as\ plt}. We will not using the short
+name of \texttt{pyplot} module in this class exercises, but you should
+be aware of this deviation from norm.
+
+In the following part, your first job is to complete the
+\texttt{plotData} function below. Modify the function and fill in the
+following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    pyplot.plot(x, y, }\StringTok{'ro'}\NormalTok{, ms}\OperatorTok{=}\DecValTok{10}\NormalTok{, mec}\OperatorTok{=}\StringTok{'k'}\NormalTok{)}
+\NormalTok{    pyplot.ylabel(}\StringTok{'Profit in $10,000'}\NormalTok{)}
+\NormalTok{    pyplot.xlabel(}\StringTok{'Population of City in 10,000s'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{plotData}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Plots the data points x and y into a new figure. Plots the data }
+        \PY{l+s+sd}{    points and gives the figure axes labels of population and profit.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    x : array\PYZus{}like}
+        \PY{l+s+sd}{        Data point values for x\PYZhy{}axis.}
+        
+        \PY{l+s+sd}{    y : array\PYZus{}like}
+        \PY{l+s+sd}{        Data point values for y\PYZhy{}axis. Note x and y should have the same size.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Plot the training data into a figure using the \PYZdq{}figure\PYZdq{} and \PYZdq{}plot\PYZdq{}}
+        \PY{l+s+sd}{    functions. Set the axes labels using the \PYZdq{}xlabel\PYZdq{} and \PYZdq{}ylabel\PYZdq{} functions.}
+        \PY{l+s+sd}{    Assume the population and revenue data have been passed in as the x}
+        \PY{l+s+sd}{    and y arguments of this function.    }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Hint}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    You can use the \PYZsq{}ro\PYZsq{} option with plot to have the markers}
+        \PY{l+s+sd}{    appear as red circles. Furthermore, you can make the markers larger by}
+        \PY{l+s+sd}{    using plot(..., \PYZsq{}ro\PYZsq{}, ms=10), where `ms` refers to marker size. You }
+        \PY{l+s+sd}{    can also set the marker edge color using the `mec` property.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{fig} \PY{o}{=} \PY{n}{pyplot}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} open a new figure}
+            
+            \PY{c+c1}{\PYZsh{} ====================== YOUR CODE HERE ======================= }
+            
+        
+            \PY{c+c1}{\PYZsh{} =============================================================}
+\end{Verbatim}
+
+
+    Now run the defined function with the loaded data to visualize the data.
+The end result should look like the following figure:
+
+\begin{figure}
+\centering
+\includegraphics{Figures/dataset1.png}
+\caption{}
+\end{figure}
+
+Execute the next cell to visualize the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{plotData}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    To quickly learn more about the \texttt{matplotlib} plot function and
+what arguments you can provide to it, you can type \texttt{?pyplot.plot}
+in a cell within the jupyter notebook. This opens a separate page
+showing the documentation for the requested function. You can also
+search online for plotting documentation.
+
+To set the markers to red circles, we used the option
+\texttt{\textquotesingle{}or\textquotesingle{}} within the \texttt{plot}
+function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{?}pyplot.plot
+\end{Verbatim}
+
+
+     \#\#\# 2.2 Gradient Descent
+
+In this part, you will fit the linear regression parameters \(\theta\)
+to our dataset using gradient descent.
+
+\paragraph{2.2.1 Update Equations}\label{update-equations}
+
+The objective of linear regression is to minimize the cost function
+
+\[ J(\theta) = \frac{1}{2m} \sum_{i=1}^m \left( h_{\theta}(x^{(i)}) - y^{(i)}\right)^2\]
+
+where the hypothesis \(h_\theta(x)\) is given by the linear model
+\[ h_\theta(x) = \theta^Tx = \theta_0 + \theta_1 x_1\]
+
+Recall that the parameters of your model are the \(\theta_j\) values.
+These are the values you will adjust to minimize cost \(J(\theta)\). One
+way to do this is to use the batch gradient descent algorithm. In batch
+gradient descent, each iteration performs the update
+
+\[ \theta_j = \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m \left( h_\theta(x^{(i)}) - y^{(i)}\right)x_j^{(i)} \qquad \text{simultaneously update } \theta_j \text{ for all } j\]
+
+With each step of gradient descent, your parameters \(\theta_j\) come
+closer to the optimal values that will achieve the lowest cost
+J(\(\theta\)).
+
+\textbf{Implementation Note:} We store each example as a row in the the
+\(X\) matrix in Python \texttt{numpy}. To take into account the
+intercept term (\(\theta_0\)), we add an additional first column to
+\(X\) and set it to all ones. This allows us to treat \(\theta_0\) as
+simply another 'feature'.
+
+\paragraph{2.2.2 Implementation}\label{implementation}
+
+We have already set up the data for linear regression. In the following
+cell, we add another dimension to our data to accommodate the
+\(\theta_0\) intercept term. Do NOT execute this cell more than once.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Add a column of ones to X. The numpy function stack joins arrays along a given axis. }
+        \PY{c+c1}{\PYZsh{} The first axis (axis=0) refers to rows (training examples) }
+        \PY{c+c1}{\PYZsh{} and second axis (axis=1) refers to columns (features).}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+     \#\#\#\# 2.2.3 Computing the cost \(J(\theta)\)
+
+As you perform gradient descent to learn minimize the cost function
+\(J(\theta)\), it is helpful to monitor the convergence by computing the
+cost. In this section, you will implement a function to calculate
+\(J(\theta)\) so you can check the convergence of your gradient descent
+implementation.
+
+Your next task is to complete the code for the function
+\texttt{computeCost} which computes \(J(\theta)\). As you are doing
+this, remember that the variables \(X\) and \(y\) are not scalar values.
+\(X\) is a matrix whose rows represent the examples from the training
+set and \(y\) is a vector whose each elemennt represent the value at a
+given row of \(X\). 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{computeCost}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Compute cost for linear regression. Computes the cost of using theta as the}
+        \PY{l+s+sd}{    parameter for linear regression to fit the data points in X and y.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X : array\PYZus{}like}
+        \PY{l+s+sd}{        The input dataset of shape (m x n+1), where m is the number of examples,}
+        \PY{l+s+sd}{        and n is the number of features. We assume a vector of one\PYZsq{}s already }
+        \PY{l+s+sd}{        appended to the features so we have n+1 columns.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    y : array\PYZus{}like}
+        \PY{l+s+sd}{        The values of the function at each data point. This is a vector of}
+        \PY{l+s+sd}{        shape (m, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        The parameters for the regression function. This is a vector of }
+        \PY{l+s+sd}{        shape (n+1, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    J : float}
+        \PY{l+s+sd}{        The value of the regression cost function.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Compute the cost of a particular choice of theta. }
+        \PY{l+s+sd}{    You should set J to the cost.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{} initialize some useful values}
+            \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}  \PY{c+c1}{\PYZsh{} number of training examples}
+            
+            \PY{c+c1}{\PYZsh{} You need to return the following variables correctly}
+            \PY{n}{J} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{c+c1}{\PYZsh{} ====================== YOUR CODE HERE =====================}
+        
+            
+            \PY{c+c1}{\PYZsh{} ===========================================================}
+            \PY{k}{return} \PY{n}{J}
+\end{Verbatim}
+
+
+    Once you have completed the function, the next step will run
+\texttt{computeCost} two times using two different initializations of
+\(\theta\). You will see the cost printed to the screen.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{J} \PY{o}{=} \PY{n}{computeCost}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{With theta = [0, 0] }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Cost computed = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{J}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected cost value (approximately) 32.07}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} further testing of the cost function}
+        \PY{n}{J} \PY{o}{=} \PY{n}{computeCost}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{With theta = [\PYZhy{}1, 2]}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Cost computed = }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{J}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected cost value (approximately) 54.24}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \emph{You should now submit your solutions by executing the following
+cell.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{computeCost}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+     \#\#\#\# 2.2.4 Gradient descent
+
+Next, you will complete a function which implements gradient descent.
+The loop structure has been written for you, and you only need to supply
+the updates to \(\theta\) within each iteration.
+
+As you program, make sure you understand what you are trying to optimize
+and what is being updated. Keep in mind that the cost \(J(\theta)\) is
+parameterized by the vector \(\theta\), not \(X\) and \(y\). That is, we
+minimize the value of \(J(\theta)\) by changing the values of the vector
+\(\theta\), not by changing \(X\) or \(y\). Section \ref{section2} and
+to the video lectures if you are uncertain. A good way to verify that
+gradient descent is working correctly is to look at the value of
+\(J(\theta)\) and check that it is decreasing with each step.
+
+The starter code for the function \texttt{gradientDescent} calls
+\texttt{computeCost} on every iteration and saves the cost to a
+\texttt{python} list. Assuming you have implemented gradient descent and
+\texttt{computeCost} correctly, your value of \(J(\theta)\) should never
+increase, and should converge to a steady value by the end of the
+algorithm.
+
+\textbf{Vectors and matrices in \texttt{numpy}} - Important
+implementation notes
+
+A vector in \texttt{numpy} is a one dimensional array, for example
+\texttt{np.array({[}1,\ 2,\ 3{]})} is a vector. A matrix in
+\texttt{numpy} is a two dimensional array, for example
+\texttt{np.array({[}{[}1,\ 2,\ 3{]},\ {[}4,\ 5,\ 6{]}{]})}. However, the
+following is still considered a matrix
+\texttt{np.array({[}{[}1,\ 2,\ 3{]}{]})} since it has two dimensions,
+even if it has a shape of 1x3 (which looks like a vector).
+
+Given the above, the function \texttt{np.dot} which we will use for all
+matrix/vector multiplication has the following properties: - It always
+performs inner products on vectors. If
+\texttt{x=np.array({[}1,\ 2,\ 3{]})}, then \texttt{np.dot(x,\ x)} is a
+scalar. - For matrix-vector multiplication, so if \(X\) is a
+\(m\times n\) matrix and \(y\) is a vector of length \(m\), then the
+operation \texttt{np.dot(y,\ X)} considers \(y\) as a \(1 \times m\)
+vector. On the other hand, if \(y\) is a vector of length \(n\), then
+the operation \texttt{np.dot(X,\ y)} considers \(y\) as a \(n \times 1\)
+vector. - A vector can be promoted to a matrix using
+\texttt{y{[}None{]}} or \texttt{{[}y{[}np.newaxis{]}}. That is, if
+\texttt{y\ =\ np.array({[}1,\ 2,\ 3{]})} is a vector of size 3, then
+\texttt{y{[}None,\ :{]}} is a matrix of shape \(1 \times 3\). We can use
+\texttt{y{[}:,\ None{]}} to obtain a shape of \(3 \times 1\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{gradientDescent}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Performs gradient descent to learn `theta`. Updates theta by taking `num\PYZus{}iters`}
+        \PY{l+s+sd}{    gradient steps with learning rate `alpha`.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X : array\PYZus{}like}
+        \PY{l+s+sd}{        The input dataset of shape (m x n+1).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    y : arra\PYZus{}like}
+        \PY{l+s+sd}{        Value at given features. A vector of shape (m, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        Initial values for the linear regression parameters. }
+        \PY{l+s+sd}{        A vector of shape (n+1, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    alpha : float}
+        \PY{l+s+sd}{        The learning rate.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    num\PYZus{}iters : int}
+        \PY{l+s+sd}{        The number of iterations for gradient descent. }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        The learned linear regression parameters. A vector of shape (n+1, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    J\PYZus{}history : list}
+        \PY{l+s+sd}{        A python list for the values of the cost function after each iteration.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Peform a single gradient step on the parameter vector theta.}
+        
+        \PY{l+s+sd}{    While debugging, it can be useful to print out the values of }
+        \PY{l+s+sd}{    the cost function (computeCost) and gradient here.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} Initialize some useful values}
+            \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}  \PY{c+c1}{\PYZsh{} number of training examples}
+            
+            \PY{c+c1}{\PYZsh{} make a copy of theta, to avoid changing the original array, since numpy arrays}
+            \PY{c+c1}{\PYZsh{} are passed by reference to functions}
+            \PY{n}{theta} \PY{o}{=} \PY{n}{theta}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            
+            \PY{n}{J\PYZus{}history} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} Use a python list to save cost in every iteration}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} ==================== YOUR CODE HERE =================================}
+                
+        
+                \PY{c+c1}{\PYZsh{} =====================================================================}
+                
+                \PY{c+c1}{\PYZsh{} save the cost J in every iteration}
+                \PY{n}{J\PYZus{}history}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{computeCost}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{theta}\PY{p}{,} \PY{n}{J\PYZus{}history}
+\end{Verbatim}
+
+
+    After you are finished call the implemented \texttt{gradientDescent}
+function and print the computed \(\theta\). We initialize the \(\theta\)
+parameters to 0 and the learning rate \(\alpha\) to 0.01. Execute the
+following cell to check your code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} initialize fitting parameters}
+        \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} some gradient descent settings}
+        \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{1500}
+        \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.01}
+        
+        \PY{n}{theta}\PY{p}{,} \PY{n}{J\PYZus{}history} \PY{o}{=} \PY{n}{gradientDescent}\PY{p}{(}\PY{n}{X} \PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{iterations}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Theta found by gradient descent: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{, }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{o}{*}\PY{n}{theta}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Expected theta values (approximately): [\PYZhy{}3.6303, 1.1664]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    We will use your final parameters to plot the linear fit. The results
+should look like the following figure.
+
+\begin{figure}
+\centering
+\includegraphics{Figures/regression_result.png}
+\caption{}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} plot the linear fit}
+        \PY{n}{plotData}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Training data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear regression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    Your final values for \(\theta\) will also be used to make predictions
+on profits in areas of 35,000 and 70,000 people.
+
+Note the way that the following lines use matrix multiplication, rather
+than explicit summation or looping, to calculate the predictions. This
+is an example of code vectorization in \texttt{numpy}.
+
+Note that the first argument to the \texttt{numpy} function \texttt{dot}
+is a python list. \texttt{numpy} can internally converts \textbf{valid}
+python lists to numpy arrays when explicitly provided as arguments to
+\texttt{numpy} functions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Predict values for population sizes of 35,000 and 70,000}
+        \PY{n}{predict1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{3.5}\PY{p}{]}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For population = 35,000, we predict a profit of }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{predict1}\PY{o}{*}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{predict2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}\PY{p}{,} \PY{n}{theta}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For population = 70,000, we predict a profit of }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{predict2}\PY{o}{*}\PY{l+m+mi}{10000}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \emph{You should now submit your solutions by executing the next cell.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{gradientDescent}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{\texorpdfstring{2.4 Visualizing
+\(J(\theta)\)}{2.4 Visualizing J(\textbackslash{}theta)}}\label{visualizing-jtheta}
+
+To understand the cost function \(J(\theta)\) better, you will now plot
+the cost over a 2-dimensional grid of \(\theta_0\) and \(\theta_1\)
+values. You will not need to code anything new for this part, but you
+should understand how the code you have written already is creating
+these images.
+
+In the next cell, the code is set up to calculate \(J(\theta)\) over a
+grid of values using the \texttt{computeCost} function that you wrote.
+After executing the following cell, you will have a 2-D array of
+\(J(\theta)\) values. Then, those values are used to produce surface and
+contour plots of \(J(\theta)\) using the matplotlib
+\texttt{plot\_surface} and \texttt{contourf} functions. The plots should
+look something like the following:
+
+\begin{figure}
+\centering
+\includegraphics{Figures/cost_function.png}
+\caption{}
+\end{figure}
+
+The purpose of these graphs is to show you how \(J(\theta)\) varies with
+changes in \(\theta_0\) and \(\theta_1\). The cost function
+\(J(\theta)\) is bowl-shaped and has a global minimum. (This is easier
+to see in the contour plot than in the 3D surface plot). This minimum is
+the optimal point for \(\theta_0\) and \(\theta_1\), and each step of
+gradient descent moves closer to this point.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} grid over which we will calculate J}
+        \PY{n}{theta0\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{theta1\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} initialize J\PYZus{}vals to a matrix of 0\PYZsq{}s}
+        \PY{n}{J\PYZus{}vals} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{theta0\PYZus{}vals}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{theta1\PYZus{}vals}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Fill out J\PYZus{}vals}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{theta0} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{theta0\PYZus{}vals}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{theta1} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{theta1\PYZus{}vals}\PY{p}{)}\PY{p}{:}
+                \PY{n}{J\PYZus{}vals}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{computeCost}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{p}{[}\PY{n}{theta0}\PY{p}{,} \PY{n}{theta1}\PY{p}{]}\PY{p}{)}
+                
+        \PY{c+c1}{\PYZsh{} Because of the way meshgrids work in the surf command, we need to}
+        \PY{c+c1}{\PYZsh{} transpose J\PYZus{}vals before calling surf, or else the axes will be flipped}
+        \PY{n}{J\PYZus{}vals} \PY{o}{=} \PY{n}{J\PYZus{}vals}\PY{o}{.}\PY{n}{T}
+        
+        \PY{c+c1}{\PYZsh{} surface plot}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{pyplot}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{theta0\PYZus{}vals}\PY{p}{,} \PY{n}{theta1\PYZus{}vals}\PY{p}{,} \PY{n}{J\PYZus{}vals}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Surface}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} contour plot}
+        \PY{c+c1}{\PYZsh{} Plot J\PYZus{}vals as 15 contours spaced logarithmically between 0.01 and 100}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{pyplot}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{theta0\PYZus{}vals}\PY{p}{,} \PY{n}{theta1\PYZus{}vals}\PY{p}{,} \PY{n}{J\PYZus{}vals}\PY{p}{,} \PY{n}{linewidths}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{levels}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{theta}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ms}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Contour, showing minimum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{pass}
+\end{Verbatim}
+
+
+    \subsection{Optional Exercises}\label{optional-exercises}
+
+If you have successfully completed the material above, congratulations!
+You now understand linear regression and should able to start using it
+on your own datasets.
+
+For the rest of this programming exercise, we have included the
+following optional exercises. These exercises will help you gain a
+deeper understanding of the material, and if you are able to do so, we
+encourage you to complete them as well. You can still submit your
+solutions to these exercises to check if your answers are correct.
+
+\subsection{3 Linear regression with multiple
+variables}\label{linear-regression-with-multiple-variables}
+
+In this part, you will implement linear regression with multiple
+variables to predict the prices of houses. Suppose you are selling your
+house and you want to know what a good market price would be. One way to
+do this is to first collect information on recent houses sold and make a
+model of housing prices.
+
+The file \texttt{Data/ex1data2.txt} contains a training set of housing
+prices in Portland, Oregon. The first column is the size of the house
+(in square feet), the second column is the number of bedrooms, and the
+third column is the price of the house.
+
+ \#\#\# 3.1 Feature Normalization
+
+We start by loading and displaying some values from this dataset. By
+looking at the values, note that house sizes are about 1000 times the
+number of bedrooms. When features differ by orders of magnitude, first
+performing feature scaling can make gradient descent converge much more
+quickly.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Load data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex1data2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}
+        
+        \PY{c+c1}{\PYZsh{} print out some data points}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZgt{}8s\PYZcb{}}\PY{l+s+si}{\PYZob{}:\PYZgt{}8s\PYZcb{}}\PY{l+s+si}{\PYZob{}:\PYZgt{}10s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X[:,0]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X[:, 1]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{*}\PY{l+m+mi}{26}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:8.0f\PYZcb{}}\PY{l+s+si}{\PYZob{}:8.0f\PYZcb{}}\PY{l+s+si}{\PYZob{}:10.0f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Your task here is to complete the code in \texttt{featureNormalize}
+function: - Subtract the mean value of each feature from the dataset. -
+After subtracting the mean, additionally scale (divide) the feature
+values by their respective ``standard deviations.''
+
+The standard deviation is a way of measuring how much variation there is
+in the range of values of a particular feature (most data points will
+lie within ±2 standard deviations of the mean); this is an alternative
+to taking the range of values (max-min). In \texttt{numpy}, you can use
+the \texttt{std} function to compute the standard deviation.
+
+For example, the quantity \texttt{X{[}:,\ 0{]}} contains all the values
+of \(x_1\) (house sizes) in the training set, so
+\texttt{np.std(X{[}:,\ 0{]})} computes the standard deviation of the
+house sizes. At the time that the function \texttt{featureNormalize} is
+called, the extra column of 1's corresponding to \(x_0 = 1\) has not yet
+been added to \(X\).
+
+You will do this for all the features and your code should work with
+datasets of all sizes (any number of features / examples). Note that
+each column of the matrix \(X\) corresponds to one feature.
+
+\textbf{Implementation Note:} When normalizing the features, it is
+important to store the values used for normalization - the mean value
+and the standard deviation used for the computations. After learning the
+parameters from the model, we often want to predict the prices of houses
+we have not seen before. Given a new x value (living room area and
+number of bedrooms), we must first normalize x using the mean and
+standard deviation that we had previously computed from the training
+set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def}  \PY{n+nf}{featureNormalize}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Normalizes the features in X. returns a normalized version of X where}
+        \PY{l+s+sd}{    the mean value of each feature is 0 and the standard deviation}
+        \PY{l+s+sd}{    is 1. This is often a good preprocessing step to do when working with}
+        \PY{l+s+sd}{    learning algorithms.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X : array\PYZus{}like}
+        \PY{l+s+sd}{        The dataset of shape (m x n).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X\PYZus{}norm : array\PYZus{}like}
+        \PY{l+s+sd}{        The normalized dataset of shape (m x n).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    First, for each feature dimension, compute the mean of the feature}
+        \PY{l+s+sd}{    and subtract it from the dataset, storing the mean value in mu. }
+        \PY{l+s+sd}{    Next, compute the  standard deviation of each feature and divide}
+        \PY{l+s+sd}{    each feature by it\PYZsq{}s standard deviation, storing the standard deviation }
+        \PY{l+s+sd}{    in sigma. }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Note that X is a matrix where each column is a feature and each row is}
+        \PY{l+s+sd}{    an example. You needto perform the normalization separately for each feature. }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Hint}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    You might find the \PYZsq{}np.mean\PYZsq{} and \PYZsq{}np.std\PYZsq{} functions useful.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} You need to set these values correctly}
+            \PY{n}{X\PYZus{}norm} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{n}{sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} =========================== YOUR CODE HERE =====================}
+        
+            
+            \PY{c+c1}{\PYZsh{} ================================================================}
+            \PY{k}{return} \PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{sigma}
+\end{Verbatim}
+
+
+    Execute the next cell to run the implemented \texttt{featureNormalize}
+function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} call featureNormalize on the loaded data}
+        \PY{n}{X\PYZus{}norm}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{sigma} \PY{o}{=} \PY{n}{featureNormalize}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computed mean:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mu}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computed standard deviation:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sigma}\PY{p}{)}
+\end{Verbatim}
+
+
+    \emph{You should not submit your solutions.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{featureNormalize}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    After the \texttt{featureNormalize} function is tested, we now add the
+intercept term to \texttt{X\_norm}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Add intercept term to X}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{X\PYZus{}norm}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+     \#\#\# 3.2 Gradient Descent
+
+Previously, you implemented gradient descent on a univariate regression
+problem. The only difference now is that there is one more feature in
+the matrix \(X\). The hypothesis function and the batch gradient descent
+update rule remain unchanged.
+
+You should complete the code for the functions \texttt{computeCostMulti}
+and \texttt{gradientDescentMulti} to implement the cost function and
+gradient descent for linear regression with multiple variables. If your
+code in the previous part (single variable) already supports multiple
+variables, you can use it here too. Make sure your code supports any
+number of features and is well-vectorized. You can use the
+\texttt{shape} property of \texttt{numpy} arrays to find out how many
+features are present in the dataset.
+
+\textbf{Implementation Note:} In the multivariate case, the cost
+function can also be written in the following vectorized form:
+
+\[ J(\theta) = \frac{1}{2m}(X\theta - \vec{y})^T(X\theta - \vec{y}) \]
+
+where
+
+\[ X = \begin{pmatrix}
+          - (x^{(1)})^T - \\
+          - (x^{(2)})^T - \\
+          \vdots \\
+          - (x^{(m)})^T - \\ \\
+        \end{pmatrix} \qquad \mathbf{y} = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \\\end{bmatrix}\]
+
+the vectorized version is efficient when you are working with numerical
+computing tools like \texttt{numpy}. If you are an expert with matrix
+operations, you can prove to yourself that the two forms are equivalent.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{computeCostMulti}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Compute cost for linear regression with multiple variables.}
+        \PY{l+s+sd}{    Computes the cost of using theta as the parameter for linear regression to fit the data points in X and y.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X : array\PYZus{}like}
+        \PY{l+s+sd}{        The dataset of shape (m x n+1).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    y : array\PYZus{}like}
+        \PY{l+s+sd}{        A vector of shape (m, ) for the values at a given data point.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        The linear regression parameters. A vector of shape (n+1, )}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    J : float}
+        \PY{l+s+sd}{        The value of the cost function. }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Compute the cost of a particular choice of theta. You should set J to the cost.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} Initialize some useful values}
+            \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of training examples}
+            
+            \PY{c+c1}{\PYZsh{} You need to return the following variable correctly}
+            \PY{n}{J} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{c+c1}{\PYZsh{} ======================= YOUR CODE HERE ===========================}
+        
+            
+            \PY{c+c1}{\PYZsh{} ==================================================================}
+            \PY{k}{return} \PY{n}{J}
+\end{Verbatim}
+
+
+    \emph{You should now submit your solutions.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{computeCostMulti}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{gradientDescentMulti}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Performs gradient descent to learn theta.}
+        \PY{l+s+sd}{    Updates theta by taking num\PYZus{}iters gradient steps with learning rate alpha.}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X : array\PYZus{}like}
+        \PY{l+s+sd}{        The dataset of shape (m x n+1).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    y : array\PYZus{}like}
+        \PY{l+s+sd}{        A vector of shape (m, ) for the values at a given data point.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        The linear regression parameters. A vector of shape (n+1, )}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    alpha : float}
+        \PY{l+s+sd}{        The learning rate for gradient descent. }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    num\PYZus{}iters : int}
+        \PY{l+s+sd}{        The number of iterations to run gradient descent. }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        The learned linear regression parameters. A vector of shape (n+1, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    J\PYZus{}history : list}
+        \PY{l+s+sd}{        A python list for the values of the cost function after each iteration.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Peform a single gradient step on the parameter vector theta.}
+        
+        \PY{l+s+sd}{    While debugging, it can be useful to print out the values of }
+        \PY{l+s+sd}{    the cost function (computeCost) and gradient here.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} Initialize some useful values}
+            \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of training examples}
+            
+            \PY{c+c1}{\PYZsh{} make a copy of theta, which will be updated by gradient descent}
+            \PY{n}{theta} \PY{o}{=} \PY{n}{theta}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            
+            \PY{n}{J\PYZus{}history} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}iters}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} ======================= YOUR CODE HERE ==========================}
+        
+                
+                \PY{c+c1}{\PYZsh{} =================================================================}
+                
+                \PY{c+c1}{\PYZsh{} save the cost J in every iteration}
+                \PY{n}{J\PYZus{}history}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{computeCostMulti}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{theta}\PY{p}{,} \PY{n}{J\PYZus{}history}
+\end{Verbatim}
+
+
+    \emph{You should now submit your solutions.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]} \PY{o}{=} \PY{n}{gradientDescentMulti}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{3.2.1 Optional (ungraded) exercise: Selecting learning
+rates}\label{optional-ungraded-exercise-selecting-learning-rates}
+
+In this part of the exercise, you will get to try out different learning
+rates for the dataset and find a learning rate that converges quickly.
+You can change the learning rate by modifying the following code and
+changing the part of the code that sets the learning rate.
+
+Use your implementation of \texttt{gradientDescentMulti} function and
+run gradient descent for about 50 iterations at the chosen learning
+rate. The function should also return the history of \(J(\theta)\)
+values in a vector \(J\).
+
+After the last iteration, plot the J values against the number of the
+iterations.
+
+If you picked a learning rate within a good range, your plot look
+similar as the following Figure.
+
+\begin{figure}
+\centering
+\includegraphics{Figures/learning_rate.png}
+\caption{}
+\end{figure}
+
+If your graph looks very different, especially if your value of
+\(J(\theta)\) increases or even blows up, adjust your learning rate and
+try again. We recommend trying values of the learning rate \(\alpha\) on
+a log-scale, at multiplicative steps of about 3 times the previous value
+(i.e., 0.3, 0.1, 0.03, 0.01 and so on). You may also want to adjust the
+number of iterations you are running if that will help you see the
+overall trend in the curve.
+
+\textbf{Implementation Note:} If your learning rate is too large,
+\(J(\theta)\) can diverge and `blow up', resulting in values which are
+too large for computer calculations. In these situations, \texttt{numpy}
+will tend to return NaNs. NaN stands for `not a number' and is often
+caused by undefined operations that involve −∞ and +∞.
+
+\textbf{MATPLOTLIB tip:} To compare how different learning learning
+rates affect convergence, it is helpful to plot \(J\) for several
+learning rates on the same figure. This can be done by making
+\texttt{alpha} a python list, and looping across the values within this
+list, and calling the plot function in every iteration of the loop. It
+is also useful to have a legend to distinguish the different lines
+within the plot. Search online for \texttt{pyplot.legend} for help on
+showing legends in \texttt{matplotlib}.
+
+Notice the changes in the convergence curves as the learning rate
+changes. With a small learning rate, you should find that gradient
+descent takes a very long time to converge to the optimal value.
+Conversely, with a large learning rate, gradient descent might not
+converge or might even diverge! Using the best learning rate that you
+found, run the script to run gradient descent until convergence to find
+the final values of \(\theta\). Next, use this value of \(\theta\) to
+predict the price of a house with 1650 square feet and 3 bedrooms. You
+will use value later to check your implementation of the normal
+equations. Don't forget to normalize your features when you make this
+prediction!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{Instructions}
+        \PY{l+s+sd}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{We have provided you with the following starter code that runs}
+        \PY{l+s+sd}{gradient descent with a particular learning rate (alpha). }
+        
+        \PY{l+s+sd}{Your task is to first make sure that your functions \PYZhy{} `computeCost`}
+        \PY{l+s+sd}{and `gradientDescent` already work with  this starter code and}
+        \PY{l+s+sd}{support multiple variables.}
+        
+        \PY{l+s+sd}{After that, try running gradient descent with different values of}
+        \PY{l+s+sd}{alpha and see which one gives you the best result.}
+        
+        \PY{l+s+sd}{Finally, you should complete the code at the end to predict the price}
+        \PY{l+s+sd}{of a 1650 sq\PYZhy{}ft, 3 br house.}
+        
+        \PY{l+s+sd}{Hint}
+        \PY{l+s+sd}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{At prediction, make sure you do the same feature normalization.}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{c+c1}{\PYZsh{} Choose some alpha value \PYZhy{} change this}
+        \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.1}
+        \PY{n}{num\PYZus{}iters} \PY{o}{=} \PY{l+m+mi}{400}
+        
+        \PY{c+c1}{\PYZsh{} init theta and run gradient descent}
+        \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{theta}\PY{p}{,} \PY{n}{J\PYZus{}history} \PY{o}{=} \PY{n}{gradientDescentMulti}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{num\PYZus{}iters}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the convergence graph}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{J\PYZus{}history}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{J\PYZus{}history}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of iterations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pyplot}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cost J}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Display the gradient descent\PYZsq{}s result}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{theta computed from gradient descent: }\PY{l+s+si}{\PYZob{}:s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Estimate the price of a 1650 sq\PYZhy{}ft, 3 br house}
+        \PY{c+c1}{\PYZsh{} ======================= YOUR CODE HERE ===========================}
+        \PY{c+c1}{\PYZsh{} Recall that the first column of X is all\PYZhy{}ones. }
+        \PY{c+c1}{\PYZsh{} Thus, it does not need to be normalized.}
+        
+        \PY{n}{price} \PY{o}{=} \PY{l+m+mi}{0}   \PY{c+c1}{\PYZsh{} You should change this}
+        
+        \PY{c+c1}{\PYZsh{} ===================================================================}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted price of a 1650 sq\PYZhy{}ft, 3 br house (using gradient descent): \PYZdl{}}\PY{l+s+si}{\PYZob{}:.0f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{price}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \emph{You do not need to submit any solutions for this optional
+(ungraded) part.}
+
+     \#\#\# 3.3 Normal Equations
+
+In the lecture videos, you learned that the closed-form solution to
+linear regression is
+
+\[ \theta = \left( X^T X\right)^{-1} X^T\vec{y}\]
+
+Using this formula does not require any feature scaling, and you will
+get an exact solution in one calculation: there is no ``loop until
+convergence'' like in gradient descent.
+
+First, we will reload the data to ensure that the variables have not
+been modified. Remember that while you do not need to scale your
+features, we still need to add a column of 1's to the \(X\) matrix to
+have an intercept term (\(\theta_0\)). The code in the next cell will
+add the column of 1's to X for you.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Load data}
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ex1data2.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{m} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{size}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    Complete the code for the function \texttt{normalEqn} below to use the
+formula above to calculate \(\theta\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{normalEqn}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Computes the closed\PYZhy{}form solution to linear regression using the normal equations.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    X : array\PYZus{}like}
+        \PY{l+s+sd}{        The dataset of shape (m x n+1).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    y : array\PYZus{}like}
+        \PY{l+s+sd}{        The value at each data point. A vector of shape (m, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    theta : array\PYZus{}like}
+        \PY{l+s+sd}{        Estimated linear regression parameters. A vector of shape (n+1, ).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Instructions}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Complete the code to compute the closed form solution to linear}
+        \PY{l+s+sd}{    regression and put the result in theta.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Hint}
+        \PY{l+s+sd}{    \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{l+s+sd}{    Look up the function `np.linalg.pinv` for computing matrix inverse.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} ===================== YOUR CODE HERE ============================}
+        
+            
+            \PY{c+c1}{\PYZsh{} =================================================================}
+            \PY{k}{return} \PY{n}{theta}
+\end{Verbatim}
+
+
+    \emph{You should now submit your solutions.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{grader}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]} \PY{o}{=} \PY{n}{normalEqn}
+        \PY{n}{grader}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Optional (ungraded) exercise: Now, once you have found \(\theta\) using
+this method, use it to make a price prediction for a 1650-square-foot
+house with 3 bedrooms. You should find that gives the same predicted
+price as the value you obtained using the model fit with gradient
+descent (in Section 3.2.1).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Calculate the parameters from the normal equation}
+        \PY{n}{theta} \PY{o}{=} \PY{n}{normalEqn}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{;}
+        
+        \PY{c+c1}{\PYZsh{} Display normal equation\PYZsq{}s result}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Theta computed from the normal equations: }\PY{l+s+si}{\PYZob{}:s\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{theta}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        
+        \PY{c+c1}{\PYZsh{} Estimate the price of a 1650 sq\PYZhy{}ft, 3 br house}
+        \PY{c+c1}{\PYZsh{} ====================== YOUR CODE HERE ======================}
+        
+        \PY{n}{price} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} You should change this}
+        
+        \PY{c+c1}{\PYZsh{} ============================================================}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted price of a 1650 sq\PYZhy{}ft, 3 br house (using normal equations): \PYZdl{}}\PY{l+s+si}{\PYZob{}:.0f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{price}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
